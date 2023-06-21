@@ -18,6 +18,92 @@
 
 @section('private.js.code')
 
+    <script>
+        // Variable Declare
+
+        // Function Declare
+
+        var table = $('#tbl_list').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            ajax: {
+                url: "{{ route('obat.data') }}",
+                type: "POST",
+                // data: NewData,
+                dataType: "JSON",
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'nama_dagang',
+                    name: 'nama_dagang'
+                },
+                {
+                    data: 'nama_generik',
+                    name: 'nama_generik'
+                },
+                {
+                    data: 'golongan_obat',
+                    name: 'golongan_obat'
+                },
+                {
+                    data: 'bentuk_sediaan',
+                    name: 'bentuk_sediaan'
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ]
+        });
+
+        function popDelete(id) {
+            Swal.fire({
+                title: 'Yakin hapus data?',
+                showDenyButton: true,
+                confirmButtonText: 'Ya',
+                denyButtonText: `Tidak`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('obat.delete') }}",
+                        type: 'post',
+                        data: {
+                            'id': id
+                        }
+                    }).done(function(response) {
+                        var msg = response.msg ?? 'Unknow Error';
+
+                        if (response.success) {
+                            // Swal.fire('Success', msg, 'success');
+                            Swal.fire({
+                                title: 'Success',
+                                text: msg,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // location.replace("{{ route('obat.list') }}");
+                                    table.ajax.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire('Error', msg, 'error');
+                        }
+                    });
+                }
+            })
+        }
+
+        // On Event
+    </script>
+
 @endsection
 
 {{-- Content --}}
@@ -39,7 +125,7 @@
             <hr>
 
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="tbl_list" style="width: 100%;">
                     <thead>
                         <tr>
                             <td rowspan="2" style="vertical-align: middle; text-align: center;">No</td>

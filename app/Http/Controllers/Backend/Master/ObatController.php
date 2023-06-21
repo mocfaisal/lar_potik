@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\M_Obat;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
-class ObatController extends Controller
-{
+class ObatController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('backend.pages.master.obat.index');
     }
 
@@ -24,8 +23,7 @@ class ObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('backend.pages.master.obat.create');
     }
 
@@ -35,31 +33,32 @@ class ObatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
-        $no_sip = $request->input('no_sip');
-        $no_str = $request->input('no_str');
-        $gelar_awal = $request->input('gelar_awal');
-        $nama_dokter = $request->input('nama_lengkap');
-        $email_dokter = $request->input('email_dokter');
-        $no_hp = $request->input('no_hp');
-        $tempat_lahir = $request->input('tempat_lahir');
-        $tgl_lahir = $request->input('tgl_lahir');
-        $alamat = $request->input('alamat');
+        $nm_dagang = $request->input('nm_dagang');
+        $nm_generik = $request->input('nm_generik');
+        $golongan_obat = $request->input('golongan_obat');
+        $dosis = $request->input('dosis');
+        $bentuk_sediaan = $request->input('bentuk_sediaan');
+        $pabrik = $request->input('pabrik');
+        $harga_beli = $request->input('harga_beli');
+        $harga_jual = $request->input('harga_jual');
+        $keterangan = $request->input('keterangan');
 
         $datasave = [
-            'no_sip' => $no_sip,
-            'no_str' => $no_str,
-            'nama' => $nama_dokter,
-            'tempat_lahir' => $tempat_lahir,
-            'tgl_lahir' => $tgl_lahir,
-            'no_hp' => $no_hp,
-            'email' => $email_dokter,
-            'alamat' => $alamat,
+            'nama_dagang' => $nm_dagang,
+            'nama_generik' => $nm_generik,
+            'golongan_obat' => $golongan_obat,
+            'dosis' => $dosis,
+            'bentuk_sediaan' => $bentuk_sediaan,
+            'pabrik' => $pabrik,
+            // 'qty' => $qty,
+            'harga_beli' => $harga_beli,
+            'harga_jual' => $harga_jual,
+            'keterangan' => $keterangan,
         ];
 
-        $save = M_Dokter::insert($datasave);
+        $save = M_Obat::insert($datasave);
 
         if ($save) {
             $r = [
@@ -82,8 +81,7 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -93,9 +91,10 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        $data['data'] = M_Obat::select('*')->where('id', $id)->first();
+
+        return view('backend.pages.master.obat.update')->with($data);
     }
 
     /**
@@ -105,9 +104,47 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request) {
+
+        $id = $request->input('id');
+        $nm_dagang = $request->input('nm_dagang');
+        $nm_generik = $request->input('nm_generik');
+        $golongan_obat = $request->input('golongan_obat');
+        $dosis = $request->input('dosis');
+        $bentuk_sediaan = $request->input('bentuk_sediaan');
+        $pabrik = $request->input('pabrik');
+        $harga_beli = $request->input('harga_beli');
+        $harga_jual = $request->input('harga_jual');
+        $keterangan = $request->input('keterangan');
+
+        $datasave = [
+            'nama_dagang' => $nm_dagang,
+            'nama_generik' => $nm_generik,
+            'golongan_obat' => $golongan_obat,
+            'dosis' => $dosis,
+            'bentuk_sediaan' => $bentuk_sediaan,
+            'pabrik' => $pabrik,
+            // 'qty' => $qty,
+            'harga_beli' => $harga_beli,
+            'harga_jual' => $harga_jual,
+            'keterangan' => $keterangan,
+        ];
+
+        $save = M_Obat::where('id', $id)->update($datasave);
+
+        if ($save) {
+            $r = [
+                'success' => true,
+                'msg' => 'Data berhasil diupdate!',
+            ];
+        } else {
+            $r = [
+                'success' => false,
+                'msg' => 'Data gagal diupdate!',
+            ];
+        }
+
+        return response()->json($r);
     }
 
     /**
@@ -116,8 +153,47 @@ class ObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request) {
+        $id = $request->input('id');
+
+        $result = M_Obat::where('id', $id)->delete();
+
+        if ($result) {
+            $r = [
+                'success' => true,
+                'msg' => 'Data berhasil dihapus!',
+            ];
+        } else {
+            $r = [
+                'success' => false,
+                'msg' => 'Data gagal dihapus!',
+            ];
+        }
+
+        return response()->json($r);
+    }
+
+    function getData(Request $request) {
+        if ($request->ajax()) {
+            $new_data = [];
+            $data = M_Obat::select('*')->get();
+
+            if (!$data->isEmpty()) {
+                foreach ($data as $key => $val) {
+                    $new_data[] = $val;
+                }
+            }
+
+            return DataTables::of($new_data)->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . route('obat.edit', ['id' => $row['id']])  . '" class="btn icon btn-primary" title="Edit"><i class="bi bi-pencil"></i></a>';
+                    $btn .= ' | <a href="javascript:void(0);" onclick="popDelete(' . $row['id'] . ')" class="btn icon btn-danger" title="Delete"><i class="bi bi-x"></i></a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } else {
+            return false;
+        }
     }
 }

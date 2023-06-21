@@ -30,9 +30,13 @@ Route::group(['namespace' => 'Backend'], function () {
         });
 
         Route::prefix('obat')->group(function () {
+            Route::post('/data', 'ObatController@getData')->name('obat.data');
             Route::get('/list', 'ObatController@index')->name('obat.list');
             Route::get('/create', 'ObatController@create')->name('obat.create');
             Route::post('/create', 'ObatController@store')->name('obat.add');
+            Route::get('/edit/{id}', 'ObatController@edit')->name('obat.edit');
+            Route::post('/update', 'ObatController@update')->name('obat.update');
+            Route::post('/delete', 'ObatController@destroy')->name('obat.delete');
         });
     });
 });
