@@ -6,7 +6,7 @@
         <div class="col-lg-5 col-12">
             <div id="auth-left">
                 <div class="auth-logo">
-                    <a href="#"><img src="{{ asset('assets') . config('appConfig.logo') }}" alt="Logo" /></a>
+                    <a href="#"><img src="{{ asset('assets/backend') . config('appConfig.logo') }}" alt="Logo" /></a>
                 </div>
                 <h1 class="auth-title">Forgot Password</h1>
                 <p class="auth-subtitle mb-5">

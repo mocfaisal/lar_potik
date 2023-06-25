@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="#"><img src="{{ asset('assets') }}/compiled/svg/logo.svg" alt="Logo"
+                    <a href="#"><img src="{{ asset('assets/backend') }}/compiled/svg/logo.svg" alt="Logo"
                             srcset="" /></a>
                 </div>
 
@@ -46,27 +46,26 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                <li class="sidebar-item {{ (request()->is('home*')) ? 'active' : '' }}">
+                    <a href="{{ route('home') }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item active has-sub">
+                <li class="sidebar-item has-sub {{ (request()->is('obat*')) ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Master Data</span>
                     </a>
 
-                    <ul class="submenu active">
+                    <ul class="submenu {{ (request()->is('obat*')) ? 'active' : '' }}">
                         {{-- <li class="submenu-item">
                             <a href="{{ route('dokter.list') }}" class="submenu-link">Dokter</a>
                         </li> --}}
 
-                        <li class="submenu-item active">
+                        <li class="submenu-item {{ (request()->is('obat*')) ? 'active' : '' }}">
                             <a href="{{ route('obat.list') }}" class="submenu-link">Obat</a>
-
                         </li>
                     </ul>
                 </li>

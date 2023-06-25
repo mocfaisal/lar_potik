@@ -1,32 +1,32 @@
 {{-- File Resources --}}
 @section('global.resources.head')
-    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/choices.js/public/assets/styles/choices.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/@fortawesome/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/choices.js/public/assets/styles/choices.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/sweetalert2/sweetalert2.min.css">
 
-    <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/app.css" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/compiled/css/app.css" />
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/compiled/css/app-dark.css" />
 
-    <script src="{{ asset('assets') }}/static/js/initTheme.js"></script>
+    <script src="{{ asset('assets/backend') }}/static/js/initTheme.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/extensions/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/DataTables/datatables.min.css">
 
 @endsection
 
 @section('global.resources.footer')
-    <script src="{{ asset('assets') }}/static/js/components/dark.js"></script>
-    <script src="{{ asset('assets') }}/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="{{ asset('assets') }}/extensions/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/static/js/components/dark.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/sweetalert2/sweetalert2.min.js"></script>
 
-    <script src="{{ asset('assets') }}/compiled/js/app.js"></script>
-    <script src="{{ asset('assets') }}/extensions/jquery/jquery.min.js"></script>
-    <script src="{{ asset('assets') }}/extensions/parsleyjs/parsley.min.js"></script>
-    <script src="{{ asset('assets') }}/extensions/choices.js/public/assets/scripts/choices.js"></script>
-    <script src="{{ asset('assets') }}/extensions/DataTables/datatables.min.js"></script>
-    <script src="{{ asset('assets') }}/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/compiled/js/app.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/parsleyjs/parsley.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/choices.js/public/assets/scripts/choices.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/DataTables/datatables.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script src="{{ asset('assets') }}/static/js/pages/parsley.js"></script>
+    <script src="{{ asset('assets/backend') }}/static/js/pages/parsley.js"></script>
 
 @endsection
 

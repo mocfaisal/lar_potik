@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Frontend\PortalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +15,43 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    // return view('backend.pages.dokter.index');
-    return redirect()->route('obat.list');
+
+    return redirect()->route('portal');
 });
+
+Route::get('/portal', [PortalController::class, 'index'])->name('portal');
+
+
+Route::group(['namespace' => 'Auth'], function () {
+    // Namespace Auth
+
+    // Route::get('/', function(){
+    //     return redirect()->route('auth.login');
+    // });
+
+    Route::prefix('login')->group(function () {
+        Route::get('/', 'LoginController@index')->name('auth.login');
+        Route::post('/processLogin', 'LoginController@processLogin')->name('auth.login.process');
+
+        Route::get('/logout', 'LoginController@logout')->name('auth.logout');
+    });
+
+    // Route::prefix('register')->group(function () {
+    //     Route::get('/', 'RegisterController@index')->name('auth.register');
+    // });
+
+    // Route::prefix('forget')->group(function () {
+    //     Route::get('/', 'ForgetController@index')->name('auth.forget');
+    // });
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/logout', function () {
+    return redirect()->route('auth.logout');
+});
+
+
 
 Route::group(['namespace' => 'Backend'], function () {
     Route::group(['namespace' => 'Master'], function () {
@@ -38,25 +72,5 @@ Route::group(['namespace' => 'Backend'], function () {
             Route::post('/update', 'ObatController@update')->name('obat.update');
             Route::post('/delete', 'ObatController@destroy')->name('obat.delete');
         });
-    });
-});
-
-Route::group(['namespace' => 'Auth'], function () {
-    // Namespace Auth
-
-    // Route::get('/', function(){
-    //     return redirect()->route('auth.login');
-    // });
-
-    Route::prefix('login')->group(function () {
-        Route::get('/', 'LoginController@index')->name('auth.login');
-    });
-
-    Route::prefix('register')->group(function () {
-        Route::get('/', 'RegisterController@index')->name('auth.register');
-    });
-
-    Route::prefix('forget')->group(function () {
-        Route::get('/', 'ForgetController@index')->name('auth.forget');
     });
 });
