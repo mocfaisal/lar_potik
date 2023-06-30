@@ -23,13 +23,18 @@
             $('#frm_master').parsley();
         });
 
+        $(".numericOnly").keypress(function(e) {
+            if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+        });
+
+
         $('#btn_save').on('click', function(e) {
             var form = $('#frm_master');
             form.parsley().validate();
 
             if (form.parsley().isValid()) {
                 $.ajax({
-                    url: "{{ route('obat.update') }}",
+                    url: "{{ route('master.obat.update') }}",
                     type: 'post',
                     data: form.serializeArray()
                 }).done(function(response) {
@@ -44,7 +49,7 @@
                             confirmButtonText: 'OK',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                location.replace("{{ route('obat.list') }}");
+                                location.replace("{{ route('master.obat.list') }}");
                             }
                         });
                     } else {
@@ -56,7 +61,7 @@
         });
 
         $('#btn_cancel').on('click', function(e) {
-            let link_ = "{{ route('obat.list') }}";
+            let link_ = "{{ route('master.obat.list') }}";
             location.replace(link_);
         });
     </script>
@@ -72,7 +77,7 @@
     ?>
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Update obat</h4>
+            <h4 class="card-title">Update Obat</h4>
         </div>
         <div class="card-body">
 
@@ -100,12 +105,14 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="golongan_obat">Golongan Obat</label>
-                                <select class="form-select choices multiple-remove" name="golongan_obat" id="golongan_obat"
+                                {{-- <select class="form-select choices multiple-remove" name="golongan_obat" id="golongan_obat"
                                     multiple="multiple">
                                     <option>IT</option>
                                     <option>Blade Runner</option>
                                     <option>Thor Ragnarok</option>
-                                </select>
+                                </select> --}}
+                                <input type="text" class="form-control" name="golongan_obat" id="golongan_obat"
+                                placeholder="Golongan Obat" value="{{ $data['golongan_obat'] }}" required>
                             </div>
                         </div>
 
@@ -138,7 +145,7 @@
                                 <label for="harga_beli">Harga Beli</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Rp.</span>
-                                    <input type="text" class="form-control" name="harga_beli" id="harga_beli"
+                                    <input type="text" class="form-control numericOnly" name="harga_beli" id="harga_beli"
                                         placeholder="Harga Beli" value="{{ $data['harga_beli'] }}" required>
                                     <span class="input-group-text">,-</span>
                                 </div>
@@ -150,10 +157,18 @@
                                 <label for="harga_beli">Harga Jual</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Rp.</span>
-                                    <input type="text" class="form-control" name="harga_jual" id="harga_jual"
+                                    <input type="text" class="form-control numericOnly" name="harga_jual" id="harga_jual"
                                         placeholder="Harga Jual" value="{{ $data['harga_jual'] }}" required>
                                     <span class="input-group-text">,-</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="stock">Stock</label>
+                                <input type="number" class="form-control" name="stock" id="stock"
+                                    placeholder="Stock" value="{{ $data['qty'] }}"  required>
                             </div>
                         </div>
 

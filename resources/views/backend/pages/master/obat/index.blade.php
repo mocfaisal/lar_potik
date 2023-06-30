@@ -28,7 +28,7 @@
             serverSide: true,
             destroy: true,
             ajax: {
-                url: "{{ route('obat.data') }}",
+                url: "{{ route('master.obat.data') }}",
                 type: "POST",
                 // data: NewData,
                 dataType: "JSON",
@@ -54,7 +54,12 @@
                 {
                     data: 'bentuk_sediaan',
                     name: 'bentuk_sediaan'
-                }, {
+                },
+                {
+                    data: 'qty',
+                    name: 'qty'
+                },
+                {
                     data: 'action',
                     name: 'action',
                     orderable: false,
@@ -72,7 +77,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('obat.delete') }}",
+                        url: "{{ route('master.obat.delete') }}",
                         type: 'post',
                         data: {
                             'id': id
@@ -89,7 +94,7 @@
                                 confirmButtonText: 'OK',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    // location.replace("{{ route('obat.list') }}");
+                                    // location.replace("{{ route('master.obat.list') }}");
                                     table.ajax.reload();
                                 }
                             });
@@ -116,7 +121,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    <a class="btn icon btn-primary rounded-pill" href="{{ route('obat.create') }}">
+                    <a class="btn icon btn-primary rounded-pill" href="{{ route('master.obat.create') }}">
                         <i class="bi bi-plus-circle"></i> Add Data
                     </a>
                 </div>
@@ -132,6 +137,7 @@
                             <td colspan="2" style="vertical-align: middle; text-align: center;">Nama</td>
                             <td rowspan="2" style="vertical-align: middle; text-align: center;">Golongan</td>
                             <td rowspan="2" style="vertical-align: middle; text-align: center;">Bentuk Sediaan</td>
+                            <td rowspan="2" style="vertical-align: middle; text-align: center;">Stock</td>
                             <td rowspan="2" style="vertical-align: middle; text-align: center;">Action</td>
                         </tr>
                         <tr>

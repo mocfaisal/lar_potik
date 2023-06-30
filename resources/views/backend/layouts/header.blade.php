@@ -13,6 +13,7 @@
         type="image/png" />
 
     @yield('global.resources.head')
+    @yield('global.css.code')
 
     @yield('private.css.file')
     @yield('private.css.code')

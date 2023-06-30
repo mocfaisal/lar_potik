@@ -1,4 +1,4 @@
-<div id="sidebar" class="sidebar-desktop active">
+<div class="sidebar-desktop active" id="sidebar">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
@@ -9,9 +9,9 @@
                     </a>
                 </div>
 
-                <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
+                <div class="theme-toggle d-flex align-items-center mt-2 gap-2">
+                    <svg class="iconify iconify--system-uicons" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="20"
                         height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
                         <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -27,19 +27,19 @@
                         </g>
                     </svg>
                     <div class="form-check form-switch fs-6">
-                        <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer" />
+                        <input type="checkbox" class="form-check-input me-0" id="toggle-dark" style="cursor: pointer" />
                         <label class="form-check-label"></label>
                     </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20"
-                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <svg class="iconify iconify--mdi" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="20"
+                        height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
                         </path>
                     </svg>
                 </div>
                 <div class="sidebar-toggler x">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    <a class="sidebar-hide d-xl-none d-block" href="#"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
@@ -48,30 +48,38 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item {{ (request()->is('home*')) ? 'active' : '' }}">
-                    <a href="{{ route('home') }}" class="sidebar-link">
+                <li class="sidebar-item {{ request()->is('home*') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('home') }}">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item has-sub {{ (request()->is('obat*')) ? 'active' : '' }}">
-                    <a href="#" class="sidebar-link">
+                <li class="sidebar-item has-sub {{ request()->is('master*') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="#">
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Master Data</span>
                     </a>
 
-                    <ul class="submenu {{ (request()->is('obat*')) ? 'active' : '' }}">
-                        {{-- <li class="submenu-item">
-                            <a href="{{ route('dokter.list') }}" class="submenu-link">Dokter</a>
-                        </li> --}}
-
-                        <li class="submenu-item {{ (request()->is('obat*')) ? 'active' : '' }}">
-                            <a href="{{ route('obat.list') }}" class="submenu-link">Obat</a>
+                    <ul class="submenu {{ request()->is('master*') ? 'active' : '' }}">
+                        <li class="submenu-item {{ request()->is('master/obat*') ? 'active' : '' }}">
+                            <a class="submenu-link" href="{{ route('master.obat.list') }}">Obat</a>
                         </li>
                     </ul>
                 </li>
 
+                <li class="sidebar-item has-sub {{ request()->is('transaksi*') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="#">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Transaksi</span>
+                    </a>
+
+                    <ul class="submenu {{ request()->is('transaksi*') ? 'active' : '' }}">
+                        <li class="submenu-item {{ request()->is('transaksi/obat*') ? 'active' : '' }}">
+                            <a class="submenu-link" href="{{ route('transaksi.obat.list') }}">Obat</a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>

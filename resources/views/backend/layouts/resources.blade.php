@@ -9,9 +9,11 @@
 
     <script src="{{ asset('assets/backend') }}/static/js/initTheme.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"
+        href="{{ asset('assets/backend') }}/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/DataTables/datatables.min.css">
-
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/backend') }}/extensions/jquery-ui/jquery-ui.theme.min.css">
 @endsection
 
 @section('global.resources.footer')
@@ -21,16 +23,61 @@
 
     <script src="{{ asset('assets/backend') }}/compiled/js/app.js"></script>
     <script src="{{ asset('assets/backend') }}/extensions/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets/backend') }}/extensions/jquery-ui/jquery-ui.min.js"></script>
+
     <script src="{{ asset('assets/backend') }}/extensions/parsleyjs/parsley.min.js"></script>
     <script src="{{ asset('assets/backend') }}/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="{{ asset('assets/backend') }}/extensions/DataTables/datatables.min.js"></script>
     <script src="{{ asset('assets/backend') }}/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="{{ asset('assets/backend') }}/static/js/pages/parsley.js"></script>
-
 @endsection
 
 {{-- Code Resources --}}
+@section('global.css.code')
+    <style type="text/css">
+        .ui-autocomplete {
+            position: absolute;
+            z-index: 1000;
+            cursor: default;
+            padding: 0;
+            margin-top: 2px;
+            list-style: none;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .ui-autocomplete>li {
+            padding: 3px 20px;
+        }
+
+        .ui-autocomplete>li.ui-state-focus {
+            background-color: #DDD;
+        }
+
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
+        .ui-menu {}
+
+        .ui-menu-item:hover {
+            color: #fff;
+            background: #007FFF;
+        }
+
+        .ui-front {
+            z-index: 9999;
+        }
+    </style>
+@endsection
+
 @section('global.javascript.footer')
     <script>
         $.ajaxSetup({

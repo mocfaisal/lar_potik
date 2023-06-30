@@ -6,7 +6,8 @@
         <div class="col-lg-5 col-12">
             <div id="auth-left">
                 <div class="auth-logo">
-                    <a href="#"><img src="{{ asset('assets/backend') . config('appConfig.logo') }}" alt="Logo" /></a>
+                    {{-- <a href="#"><img src="{{ asset('assets/backend') . config('appConfig.logo') }}" alt="Logo" /></a> --}}
+                    <h1>{{ config('app.name') }}</h1>
                 </div>
                 <h1 class="auth-title">Forgot Password</h1>
                 <p class="auth-subtitle mb-5">
@@ -20,14 +21,14 @@
                             <i class="bi bi-envelope"></i>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                    <button class="btn btn-primary btn-block btn-lg mt-5 shadow-lg">
                         Send
                     </button>
                 </form>
-                <div class="text-center mt-5 text-lg fs-4">
+                <div class="fs-4 mt-5 text-center text-lg">
                     <p class="text-gray-600">
                         Remember your account?
-                        <a href="{{ route('auth.login') }}" class="font-bold">Log in</a>.
+                        <a class="font-bold" href="{{ route('auth.login') }}">Log in</a>.
                     </p>
                 </div>
             </div>

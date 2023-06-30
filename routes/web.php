@@ -53,25 +53,39 @@ Route::get('/logout', function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+    Route::group(['namespace' => 'Backend'], function () {
+        Route::group(['namespace' => 'Master'], function () {
+            // Namespace Backend/Master
 
-Route::group(['namespace' => 'Backend'], function () {
-    Route::group(['namespace' => 'Master'], function () {
-        // Namespace Backend/Master
-
-        Route::prefix('dokter')->group(function () {
-            Route::get('/list', 'DokterController@index')->name('dokter.list');
-            Route::get('/create', 'DokterController@create')->name('dokter.create');
-            Route::post('/create', 'DokterController@store')->name('dokter.add');
+            Route::prefix('master')->group(function () {
+                Route::prefix('obat')->group(function () {
+                    Route::post('/data', 'ObatController@getData')->name('master.obat.data');
+                    Route::get('/list', 'ObatController@index')->name('master.obat.list');
+                    Route::get('/create', 'ObatController@create')->name('master.obat.create');
+                    Route::post('/create', 'ObatController@store')->name('master.obat.add');
+                    Route::get('/edit/{id}', 'ObatController@edit')->name('master.obat.edit');
+                    Route::post('/update', 'ObatController@update')->name('master.obat.update');
+                    Route::post('/delete', 'ObatController@destroy')->name('master.obat.delete');
+                });
+            });
         });
 
-        Route::prefix('obat')->group(function () {
-            Route::post('/data', 'ObatController@getData')->name('obat.data');
-            Route::get('/list', 'ObatController@index')->name('obat.list');
-            Route::get('/create', 'ObatController@create')->name('obat.create');
-            Route::post('/create', 'ObatController@store')->name('obat.add');
-            Route::get('/edit/{id}', 'ObatController@edit')->name('obat.edit');
-            Route::post('/update', 'ObatController@update')->name('obat.update');
-            Route::post('/delete', 'ObatController@destroy')->name('obat.delete');
+        Route::group(['namespace' => 'Transaksi'], function () {
+            // Namespace Backend/Transaksi
+
+            Route::prefix('transaksi')->group(function () {
+                Route::prefix('obat')->group(function () {
+                    Route::post('/data', 'Trans_ObatController@getData')->name('transaksi.obat.data');
+                    Route::get('/list', 'Trans_ObatController@index')->name('transaksi.obat.list');
+                    Route::get('/create', 'Trans_ObatController@create')->name('transaksi.obat.create');
+                    Route::post('/create', 'Trans_ObatController@store')->name('transaksi.obat.add');
+                    Route::get('/edit/{id}', 'Trans_ObatController@edit')->name('transaksi.obat.edit');
+                    Route::post('/update', 'Trans_ObatController@update')->name('transaksi.obat.update');
+                    Route::post('/delete', 'Trans_ObatController@destroy')->name('transaksi.obat.delete');
+                    Route::post('/getObat', 'Trans_ObatController@getObat')->name('transaksi.obat.getObat');
+                });
+            });
         });
     });
 });

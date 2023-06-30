@@ -43,6 +43,7 @@ class ObatController extends Controller {
         $pabrik = $request->input('pabrik');
         $harga_beli = $request->input('harga_beli');
         $harga_jual = $request->input('harga_jual');
+        $stock = $request->input('stock');
         $keterangan = $request->input('keterangan');
 
         $datasave = [
@@ -52,7 +53,7 @@ class ObatController extends Controller {
             'dosis' => $dosis,
             'bentuk_sediaan' => $bentuk_sediaan,
             'pabrik' => $pabrik,
-            // 'qty' => $qty,
+            'qty' => $stock,
             'harga_beli' => $harga_beli,
             'harga_jual' => $harga_jual,
             'keterangan' => $keterangan,
@@ -115,6 +116,7 @@ class ObatController extends Controller {
         $pabrik = $request->input('pabrik');
         $harga_beli = $request->input('harga_beli');
         $harga_jual = $request->input('harga_jual');
+        $stock = $request->input('stock');
         $keterangan = $request->input('keterangan');
 
         $datasave = [
@@ -124,7 +126,7 @@ class ObatController extends Controller {
             'dosis' => $dosis,
             'bentuk_sediaan' => $bentuk_sediaan,
             'pabrik' => $pabrik,
-            // 'qty' => $qty,
+            'qty' => $stock,
             'harga_beli' => $harga_beli,
             'harga_jual' => $harga_jual,
             'keterangan' => $keterangan,
@@ -180,13 +182,14 @@ class ObatController extends Controller {
 
             if (!$data->isEmpty()) {
                 foreach ($data as $key => $val) {
+                    $val['qty'] = number_format($val['qty'], 0, ",", ".");
                     $new_data[] = $val;
                 }
             }
 
             return DataTables::of($new_data)->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="' . route('obat.edit', ['id' => $row['id']])  . '" class="btn icon btn-primary" title="Edit"><i class="bi bi-pencil"></i></a>';
+                    $btn = '<a href="' . route('master.obat.edit', ['id' => $row['id']])  . '" class="btn icon btn-primary" title="Edit"><i class="bi bi-pencil"></i></a>';
                     $btn .= ' | <a href="javascript:void(0);" onclick="popDelete(' . $row['id'] . ')" class="btn icon btn-danger" title="Delete"><i class="bi bi-x"></i></a>';
                     return $btn;
                 })
