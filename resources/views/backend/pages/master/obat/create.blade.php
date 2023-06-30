@@ -38,7 +38,17 @@
                     var msg = response.msg ?? 'Unknow Error';
 
                     if (response.success) {
-                        Swal.fire('Success', msg, 'success');
+                        // Swal.fire('Success', msg, 'success');
+                        Swal.fire({
+                            title: 'Success',
+                            text: msg,
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.replace("{{ route('obat.list') }}");
+                            }
+                        });
                     } else {
                         Swal.fire('Error', msg, 'error');
                     }

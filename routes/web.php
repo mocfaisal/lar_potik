@@ -15,11 +15,12 @@ use App\Http\Controllers\Frontend\PortalController;
 
 Route::get('/', function () {
     // return view('welcome');
-
     return redirect()->route('portal');
 });
 
+Route::get('/', [PortalController::class, 'index']);
 Route::get('/portal', [PortalController::class, 'index'])->name('portal');
+
 
 
 Route::group(['namespace' => 'Auth'], function () {
@@ -73,4 +74,26 @@ Route::group(['namespace' => 'Backend'], function () {
             Route::post('/delete', 'ObatController@destroy')->name('obat.delete');
         });
     });
+});
+
+// Others
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('route:clear');
+    $exitCode = Artisan::call('config:cache');
+    $exitCode = Artisan::call('view:cache');
+    $exitCode = Artisan::call('route:cache');
+    // $exitCode = Artisan::call('clear-compiled');
+
+    return 'DONE'; //Return anything
+});
+
+Route::get('/clear-cache2', function () {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('route:clear');
+    return 'DONE'; //Return anything
 });
